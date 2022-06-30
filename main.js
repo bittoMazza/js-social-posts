@@ -100,7 +100,8 @@ let numCounter = 0;
 const containerPost = document.getElementById('container')
 posts.forEach( (singlePost) => {
     let newPost = document.createElement('div')
-    newPost.classList.add('post')        
+    newPost.classList.add('post')   
+    const date = new Date(singlePost.created)    
     newPost.innerHTML = 
         `<div class="post__header">
             <div class="post-meta">
@@ -109,7 +110,7 @@ posts.forEach( (singlePost) => {
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${singlePost.author.name}</div>
-                    <div class="post-meta__time">${singlePost.created}</div>
+                    <div class="post-meta__time">${date.toLocaleDateString('en-us')}</div>
                 </div>
             </div>
         </div>  
@@ -141,16 +142,14 @@ posts.forEach( (singlePost) => {
         likeIcon.classList.add('like-button--liked')
     }
 
-    // Creiamo l'evento del botton 
+    // Creiamo l'evento del bottone
     let likeButton = newPost.querySelector('.like-button');
     likeButton.addEventListener('click',function (){
         if(singlePost.is_liked == true){
             likeLabel.classList.remove('like-button--liked')
             likeIcon.classList.remove('like-button--liked')  
             singlePost.is_liked = false;
-            likeCounter.textContent = singlePost.likes-=1;
-            console.log(singlePost.likes);
-            
+            likeCounter.textContent = singlePost.likes-=1;          
         }
         else{
             likeLabel.classList.add('like-button--liked')
@@ -159,8 +158,7 @@ posts.forEach( (singlePost) => {
             likeCounter.textContent = singlePost.likes+=1;
         }
     })
-    containerPost.append(newPost);
-    
+    containerPost.append(newPost);  
 } 
 )
 
