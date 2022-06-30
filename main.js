@@ -5,7 +5,7 @@ const posts = [
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
             "name": "Phil Mangione",
-            "image": "https://unsplash.it/300/300?image=15"
+            "image": null
         },
         "likes": 80,
         "is_liked" : true,
@@ -53,7 +53,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
             "name": "Stefano Tortellini",
-            "image": "https://unsplash.it/300/300?image=29"
+            "image": null
         },
         "likes": 95,
          "is_liked" : false,
@@ -77,7 +77,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=531",
         "author": {
             "name": "Grace Hunterdan",
-            "image": "https://unsplash.it/300/300?image=59"
+            "image": null
         },
         "likes": 95,
          "is_liked" : false,
@@ -89,7 +89,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=554",
         "author": {
             "name": "Mario Di Nio",
-            "image": "https://unsplash.it/300/300?image=59"
+            "image": null
         },
         "likes": 95,
          "is_liked" : true,
@@ -101,7 +101,7 @@ const containerPost = document.getElementById('container')
 posts.forEach( (singlePost) => {
     let newPost = document.createElement('div')
     newPost.classList.add('post')   
-    const date = new Date(singlePost.created)    
+    const date = new Date(singlePost.created)  
     newPost.innerHTML = 
         `<div class="post__header">
             <div class="post-meta">
@@ -133,6 +133,7 @@ posts.forEach( (singlePost) => {
         </div>
     `
     numCounter++;
+    let postIcon = newPost.querySelector('.post-meta__icon')
     let likeLabel = newPost.querySelector('.like-button__label');
     let likeIcon = newPost.querySelector('.like-button__icon');  
     let likeCounter = newPost.querySelector('.js-likes-counter')
@@ -158,6 +159,21 @@ posts.forEach( (singlePost) => {
             likeCounter.textContent = singlePost.likes+=1;
         }
     })
+
+    if(singlePost.author.image == null){
+        const words = singlePost.author.name.split(' ');
+        firstName = words[0].charAt(0)
+        lastName = words[1].charAt(0)
+        let profilePicDefault = document.createElement('div')
+        profilePicDefault.classList.add('profile-pic-default')
+        let postSpanIcon = document.createElement('span')
+        postSpanIcon.innerHTML = firstName + lastName
+        profilePicDefault.append(postSpanIcon);
+        postIcon.innerHTML="";
+        postIcon.append(profilePicDefault);
+    }
+
+
     containerPost.append(newPost);  
 } 
 )
