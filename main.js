@@ -120,7 +120,7 @@ posts.forEach( (singlePost) => {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -134,7 +134,8 @@ posts.forEach( (singlePost) => {
     numCounter++;
     let likeLabel = newPost.querySelector('.like-button__label');
     let likeIcon = newPost.querySelector('.like-button__icon');  
-    
+    let likeCounter = newPost.querySelector('.js-likes-counter')
+    console.log(likeCounter)
     if(singlePost.is_liked == true){
         likeLabel.classList.add('like-button--liked')
         likeIcon.classList.add('like-button--liked')
@@ -147,16 +148,21 @@ posts.forEach( (singlePost) => {
             likeLabel.classList.remove('like-button--liked')
             likeIcon.classList.remove('like-button--liked')  
             singlePost.is_liked = false;
+            likeCounter.textContent = singlePost.likes-=1;
+            console.log(singlePost.likes);
+            
         }
         else{
             likeLabel.classList.add('like-button--liked')
             likeIcon.classList.add('like-button--liked')
-            singlePost.is_liked = true;
+            singlePost.is_liked = true;           
+            likeCounter.textContent = singlePost.likes+=1;
         }
     })
     containerPost.append(newPost);
     
-} )
+} 
+)
 
 
 
