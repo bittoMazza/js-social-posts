@@ -161,9 +161,11 @@ posts.forEach( (singlePost) => {
     })
 
     if(singlePost.author.image == null){
+        // Dividiamo "name" in 2 parole e di queste prendiamo solo la prima lettera
         const words = singlePost.author.name.split(' ');
         firstName = words[0].charAt(0)
         lastName = words[1].charAt(0)
+        // Creiamo il div in cui inserire lo span con le lettere
         let profilePicDefault = document.createElement('div')
         profilePicDefault.classList.add('profile-pic-default')
         let postSpanIcon = document.createElement('span')
